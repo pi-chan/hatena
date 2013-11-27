@@ -4,12 +4,15 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'hatena/version'
 
 Gem::Specification.new do |spec|
+  spec.add_dependency 'faraday', ['>= 0.8', '< 0.10']
+  spec.add_dependency 'nokogiri', ['>= 1.5.10']
+  spec.add_dependency 'simple_oauth', '~> 0.2.0'
   spec.name          = "hatena"
   spec.version       = Hatena::VERSION
-  spec.authors       = ["SET_ME_LOCALLY"]
-  spec.email         = ["SET_ME_LOCALLY"]
-  spec.description   = %q{TODO: Write a gem description}
-  spec.summary       = %q{TODO: Write a gem summary}
+  spec.authors       = ["xoyip"]
+  spec.email         = ["xoyip@piyox.info"]
+  spec.description   = %q{Ruby interface for Hatena API}
+  spec.summary       = %q{Ruby interface for Hatena API}
   spec.homepage      = ""
   spec.license       = "MIT"
 

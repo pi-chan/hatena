@@ -1,6 +1,8 @@
 # Hatena
 
-TODO: Write a gem description
+This is prototype version of Ruby inteface for Hatena API.
+
+WARNING: This gem is the rough version for private use.
 
 ## Installation
 

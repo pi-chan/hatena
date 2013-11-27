@@ -1,5 +1,4 @@
 require "hatena/version"
-
-module Hatena
-  # Your code goes here...
-end
+require "hatena/error"
+require "hatena/blog/client.rb"
+require "hatena/blog/entry.rb"
