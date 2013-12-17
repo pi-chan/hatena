@@ -39,10 +39,16 @@ module Hatena
         entries
       end
 
+      def fetch_entry(url)
+        body = fetch_entry_body(url)
+        doc = Nokogiri::XML(body)
+        Hatena::Blog::Entry.new(doc)
+      end
+
       def publish(url)
         # raise Hatena::NotDraftError if entry.draft?
 
-        body = fetch_entry(url)
+        body = fetch_entry_body(url)
         body.gsub!(/<app:draft>yes<\/app:draft>/, "<app:draft>no</app:draft>")
         date = DateTime.now.to_s # (DateTime.now - 1.0/1440).to_s
         %W(updated published app:edited).each do |tag|
@@ -67,7 +73,7 @@ module Hatena
         SimpleOAuth::Header.new(method.to_sym, uri, {}, @credentials).to_s
       end
 
-      def fetch_entry(url)
+      def fetch_entry_body(url)
         connection = Faraday.new
         uri = URI.parse(url)
         response = connection.send(:get, uri) do |req|
