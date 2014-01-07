@@ -15,7 +15,7 @@ module Hatena
         @user_name = user_name
       end
 
-      def fetch_entries
+      def fetch_drafts(from=nil)
         connection = Faraday.new
         uri = URI.parse("https://blog.hatena.ne.jp/#{@user_name}/#{@user_name}.hatenablog.com/atom/entry")
         
@@ -26,9 +26,19 @@ module Hatena
           end
 
           doc = Nokogiri::XML(response.body)
+          should_break_loop = false
           entries += doc.search("entry").select do |entry|
-            entry.at('app|draft').content == "yes"
+            draft = entry.at('app|draft').content == "yes"
+            if from
+              within_time = DateTime.parse(entry.at('updated').content) > from
+              should_break_loop = true unless within_time
+              draft and within_time
+            else
+              draft
+            end
           end.map{|entry| Hatena::Blog::Entry.new(entry)}
+
+          break if should_break_loop
 
           next_link = doc.at('link[@rel="next"]')
           break unless next_link
