@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"
+      xmlns:app="http://www.w3.org/2007/app">
+  <link rel="first" href="https://blog.hatena.ne.jp/hatena_id/blog_id.hatenablog.com/atom/entry" />
+  <link rel="next" href="https://blog.hatena.ne.jp/hatena_id/blog_id.hatenablog.com/atom/entry?page=2" />
+  <title>ブログタイトル</title>
+  <link rel="alternate" href="http://blog_id.hatenablog.com/"/>
+  <updated>2013-08-27T15:17:06+09:00</updated>
+  <author>
+    <name>hatena_id</name>
+  </author>
+  <generator uri="http://blog.hatena.ne.jp/" version="100000000">Hatena::Blog</generator>
+  <id>hatenablog://blog/2000000000000</id>
+  <entry>
+    <id>tag:blog.hatena.ne.jp,2013:blog-hatena_id-20000000000000-3000000000000000</id>
+    <link rel="edit" href="https://blog.hatena.ne.jp/hatena_id/blog_id.hatenablog.com/atom/edit/2500000000"/>
+    <link rel="alternate" type="text/html" href="http://blog_id.hatenablog.com/entry/2013/09/02/112823"/>
+    <author><name>hatena_id</name></author>
+    <title>記事タイトル</title>
+    <updated>2013-09-02T11:28:23+09:00</updated>
+    <published>2013-09-02T11:28:23+09:00</published>
+    <app:edited>2013-09-02T11:28:23+09:00</app:edited>
+    <summary type="text">hoge </summary>
+    <content type="text/x-hatena-syntax">
+      hoge
+    </content>
+    <hatena:formatted-content type="text/html" xmlns:hatena="http://www.hatena.ne.jp/info/xmlns#">
+      hoge
+    </hatena:formatted-content>
+    <app:control>
+      <app:draft>yes</app:draft>
+    </app:control>
+  </entry>
+  <entry>
+    <id>tag:blog.hatena.ne.jp,2013:blog-hatena_id-20000000000000-3000000000000000</id>
+    <link rel="edit" href="https://blog.hatena.ne.jp/hatena_id/blog_id.hatenablog.com/atom/edit/2500000000"/>
+    <link rel="alternate" type="text/html" href="http://blog_id.hatenablog.com/entry/2013/09/02/112823"/>
+    <author><name>hatena_id</name></author>
+    <title>記事タイトル</title>
+    <updated>2013-09-02T11:28:23+09:00</updated>
+    <published>2013-09-02T11:28:23+09:00</published>
+    <app:edited>2013-09-02T11:28:23+09:00</app:edited>
+    <summary type="text">hoge </summary>
+    <content type="text/x-hatena-syntax">
+      hoge
+    </content>
+    <hatena:formatted-content type="text/html" xmlns:hatena="http://www.hatena.ne.jp/info/xmlns#">
+      hoge
+    </hatena:formatted-content>
+    <app:control>
+      <app:draft>no</app:draft>
+    </app:control>
+  </entry>  
+  <entry>
+    <id>tag:blog.hatena.ne.jp,2013:blog-hatena_id-20000000000000-3000000000000000</id>
+    <link rel="edit" href="https://blog.hatena.ne.jp/hatena_id/blog_id.hatenablog.com/atom/edit/2500000000"/>
+    <link rel="alternate" type="text/html" href="http://blog_id.hatenablog.com/entry/2013/09/02/112823"/>
+    <author><name>hatena_id</name></author>
+    <title>記事タイトル</title>
+    <updated>2013-09-02T11:28:23+09:00</updated>
+    <published>2013-09-02T11:28:23+09:00</published>
+    <app:edited>2013-09-02T11:28:23+09:00</app:edited>
+    <summary type="text">hoge </summary>
+    <content type="text/x-hatena-syntax">
+      hoge
+    </content>
+    <hatena:formatted-content type="text/html" xmlns:hatena="http://www.hatena.ne.jp/info/xmlns#">
+      hoge
+    </hatena:formatted-content>
+    <app:control>
+      <app:draft>no</app:draft>
+    </app:control>
+  </entry>  
+  <entry>
+    <id>tag:blog.hatena.ne.jp,2013:blog-hatena_id-20000000000000-3000000000000000</id>
+    <link rel="edit" href="https://blog.hatena.ne.jp/hatena_id/blog_id.hatenablog.com/atom/edit/2500000000"/>
+    <link rel="alternate" type="text/html" href="http://blog_id.hatenablog.com/entry/2013/09/02/112823"/>
+    <author><name>hatena_id</name></author>
+    <title>記事タイトル</title>
+    <updated>2013-09-02T11:28:23+09:00</updated>
+    <published>2013-09-02T11:28:23+09:00</published>
+    <app:edited>2013-09-02T11:28:23+09:00</app:edited>
+    <summary type="text">hoge </summary>
+    <content type="text/x-hatena-syntax">
+      hoge
+    </content>
+    <hatena:formatted-content type="text/html" xmlns:hatena="http://www.hatena.ne.jp/info/xmlns#">
+      hoge
+    </hatena:formatted-content>
+    <app:control>
+      <app:draft>no</app:draft>
+    </app:control>
+  </entry>  
+  <entry>
+    <id>tag:blog.hatena.ne.jp,2013:blog-hatena_id-20000000000000-3000000000000000</id>
+    <link rel="edit" href="https://blog.hatena.ne.jp/hatena_id/blog_id.hatenablog.com/atom/edit/2500000000"/>
+    <link rel="alternate" type="text/html" href="http://blog_id.hatenablog.com/entry/2013/09/02/112823"/>
+    <author><name>hatena_id</name></author>
+    <title>記事タイトル</title>
+    <updated>2013-09-02T11:28:23+09:00</updated>
+    <published>2013-09-02T11:28:23+09:00</published>
+    <app:edited>2013-09-02T11:28:23+09:00</app:edited>
+    <summary type="text">hoge </summary>
+    <content type="text/x-hatena-syntax">
+      hoge
+    </content>
+    <hatena:formatted-content type="text/html" xmlns:hatena="http://www.hatena.ne.jp/info/xmlns#">
+      hoge
+    </hatena:formatted-content>
+    <app:control>
+      <app:draft>no</app:draft>
+    </app:control>
+  </entry>  
+  <entry>
+    <id>tag:blog.hatena.ne.jp,2013:blog-hatena_id-20000000000000-3000000000000000</id>
+    <link rel="edit" href="https://blog.hatena.ne.jp/hatena_id/blog_id.hatenablog.com/atom/edit/2500000000"/>
+    <link rel="alternate" type="text/html" href="http://blog_id.hatenablog.com/entry/2013/09/02/112823"/>
+    <author><name>hatena_id</name></author>
+    <title>記事タイトル</title>
+    <updated>2013-09-02T11:28:23+09:00</updated>
+    <published>2013-09-02T11:28:23+09:00</published>
+    <app:edited>2013-09-02T11:28:23+09:00</app:edited>
+    <summary type="text">hoge </summary>
+    <content type="text/x-hatena-syntax">
+      hoge
+    </content>
+    <hatena:formatted-content type="text/html" xmlns:hatena="http://www.hatena.ne.jp/info/xmlns#">
+      hoge
+    </hatena:formatted-content>
+    <app:control>
+      <app:draft>no</app:draft>
+    </app:control>
+  </entry>  
+  <entry>
+    <id>tag:blog.hatena.ne.jp,2013:blog-hatena_id-20000000000000-3000000000000000</id>
+    <link rel="edit" href="https://blog.hatena.ne.jp/hatena_id/blog_id.hatenablog.com/atom/edit/2500000000"/>
+    <link rel="alternate" type="text/html" href="http://blog_id.hatenablog.com/entry/2013/09/02/112823"/>
+    <author><name>hatena_id</name></author>
+    <title>記事タイトル</title>
+    <updated>2013-09-02T11:28:23+09:00</updated>
+    <published>2013-09-02T11:28:23+09:00</published>
+    <app:edited>2013-09-02T11:28:23+09:00</app:edited>
+    <summary type="text">hoge </summary>
+    <content type="text/x-hatena-syntax">
+      hoge
+    </content>
+    <hatena:formatted-content type="text/html" xmlns:hatena="http://www.hatena.ne.jp/info/xmlns#">
+      hoge
+    </hatena:formatted-content>
+    <app:control>
+      <app:draft>yes</app:draft>
+    </app:control>
+  </entry>  
+</feed>

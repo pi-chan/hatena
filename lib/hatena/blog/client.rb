@@ -5,21 +5,28 @@ module Hatena
   module Blog
     class Client
 
-      def initialize(consumer_key, consumer_secret, token, token_secret, user_name)
+      def initialize(consumer_key, consumer_secret, token, token_secret, hatena_id, blog_id)
         @credentials = {
           consumer_key: consumer_key,
           consumer_secret: consumer_secret,
           token: token,
-          token_secret: token_secret
+          token_secret: token_secret,
         }
-        @user_name = user_name
+        @hatena_id = hatena_id
+        @blog_id = blog_id
       end
 
-      def fetch_drafts(from=nil)
+      def fetch_entries(options={})
+        @range = options[:range]
+        @limit = options[:limit]
+        @draft = options[:draft]
+
         connection = Faraday.new
-        uri = URI.parse("https://blog.hatena.ne.jp/#{@user_name}/#{@user_name}.hatenablog.com/atom/entry")
+        uri = URI.parse("https://blog.hatena.ne.jp/#{@hatena_id}/#{@blog_id}/atom/entry")
         
         entries = []
+        total_count = 0
+        
         while true
           response = connection.send(:get, uri) do |req|
             req.headers[:authorization] = auth_header(:get, uri)
@@ -27,15 +34,34 @@ module Hatena
 
           doc = Nokogiri::XML(response.body)
           should_break_loop = false
+
           entries += doc.search("entry").select do |entry|
-            draft = entry.at('app|draft').content == "yes"
-            if from
-              within_time = DateTime.parse(entry.at('updated').content) > from
-              should_break_loop = true unless within_time
-              draft and within_time
+            if @draft.nil?
+              required = true
             else
-              draft
+              entry_is_published = entry.at('app|draft').content == "no"
+              required = @draft ? !entry_is_published : entry_is_published
             end
+            
+            if @range
+              updated = DateTime.parse(entry.at('updated').content)
+              if updated < @range.begin
+                should_break_loop = true
+              end
+              
+              within_time = @range.cover?(updated)
+              required &= within_time
+            end
+
+            if @limit
+              total_count += 1 if required
+              if total_count > @limit
+                should_break_loop = true
+                required = false
+              end
+            end
+            
+            required 
           end.map{|entry| Hatena::Blog::Entry.new(entry)}
 
           break if should_break_loop
@@ -46,7 +72,18 @@ module Hatena
           next_uri = next_link.attribute("href").value
           uri = URI.parse(next_uri)
         end
-        entries
+
+        return entries
+      end
+
+      def fetch_drafts(options={})
+        options[:draft] = true
+        fetch_entries(options)
+      end
+
+      def fetch_published(options={})
+        options[:draft] = false
+        fetch_entries(options)
       end
 
       def fetch_entry(url)

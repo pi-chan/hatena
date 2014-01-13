@@ -8,6 +8,7 @@ group :development, :test do
   gem 'webmock'
   gem 'growl'
   gem 'guard-spork'
+  gem 'activesupport'
 end
 
 # Specify your gem's dependencies in hatena.gemspec
