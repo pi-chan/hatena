@@ -20,60 +20,16 @@ module Hatena
         @range = options[:range]
         @limit = options[:limit]
         @draft = options[:draft]
-
-        connection = Faraday.new
+        @entries = []
+        @total_count = 0
+        
         uri = URI.parse("https://blog.hatena.ne.jp/#{@hatena_id}/#{@blog_id}/atom/entry")
-        
-        entries = []
-        total_count = 0
-        
         while true
-          response = connection.send(:get, uri) do |req|
-            req.headers[:authorization] = auth_header(:get, uri)
-          end
-
-          doc = Nokogiri::XML(response.body)
-          should_break_loop = false
-
-          entries += doc.search("entry").select do |entry|
-            if @draft.nil?
-              required = true
-            else
-              entry_is_published = entry.at('app|draft').content == "no"
-              required = @draft ? !entry_is_published : entry_is_published
-            end
-            
-            if @range
-              updated = DateTime.parse(entry.at('updated').content)
-              if updated < @range.begin
-                should_break_loop = true
-              end
-              
-              within_time = @range.cover?(updated)
-              required &= within_time
-            end
-
-            if @limit
-              total_count += 1 if required
-              if total_count > @limit
-                should_break_loop = true
-                required = false
-              end
-            end
-            
-            required 
-          end.map{|entry| Hatena::Blog::Entry.new(entry)}
-
-          break if should_break_loop
-
-          next_link = doc.at('link[@rel="next"]')
-          break unless next_link
-          
-          next_uri = next_link.attribute("href").value
-          uri = URI.parse(next_uri)
+          uri = fetch_page(uri)
+          break unless uri
         end
 
-        return entries
+        return @entries
       end
 
       def fetch_drafts(options={})
@@ -128,7 +84,65 @@ module Hatena
         end
         response.body
       end
+
+      def fetch_page(uri)
+        connection = Faraday.new
+        response = connection.send(:get, uri) do |req|
+          req.headers[:authorization] = auth_header(:get, uri)
+        end
+
+        doc = Nokogiri::XML(response.body)
+        should_fetch_more = true
+
+        doc.search("entry").each do |entry|
+          should_fetch_more = process(entry)
+        end
+
+        return nil unless should_fetch_more
+
+        return next_page(doc)
+      end
+
+      def process(entry)
+        should_fetch_more = true
+
+        if @draft.nil?
+          required = true
+        else
+          entry_is_published = entry.at('app|draft').content == "no"
+          required = @draft ? !entry_is_published : entry_is_published
+        end
+        
+        if @range
+          updated = DateTime.parse(entry.at('updated').content)
+          if updated < @range.begin
+            should_fetch_more = false
+          end
+          
+          within_time = @range.cover?(updated)
+          required &= within_time
+        end
+
+        if @limit and required and (@entries.count >= @limit)
+          should_fetch_more = false
+          required = false
+        end
+
+        if required
+          @entries << Hatena::Blog::Entry.new(entry)
+        end
+
+        return should_fetch_more
+      end
+
+      def next_page(xml_doc)
+        next_link = xml_doc.at('link[@rel="next"]')
+        return nil unless next_link
+        
+        next_uri = next_link.attribute("href").value
+        return URI.parse(next_uri)
+      end
       
-    end  
+    end
   end
 end
