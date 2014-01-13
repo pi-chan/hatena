@@ -7,12 +7,15 @@ describe Hatena::Blog::Client do
     @hatena_id = "hatena_id"
     @blog_id = "blog_id.hatenablog.com"
     @endpoint = "https://blog.hatena.ne.jp/#{@hatena_id}/#{@blog_id}"
-    
-    @client = Hatena::Blog::Client.new(
+    @credentials = Hatena::Credentials.new(
       "consumer_key",
       "consumer_secret",
       "token",
-      "token_secret",
+      "token_secret"
+    )
+    
+    @client = Hatena::Blog::Client.new(
+      @credentials,
       @hatena_id,
       @blog_id
     )
@@ -26,7 +29,7 @@ describe Hatena::Blog::Client do
     context "when arguments count is correct" do
       it "does not raise an exception" do
         expect do
-          Hatena::Blog::Client.new(0,1,2,3,4,5)
+          Hatena::Blog::Client.new(0,1,2)
         end.not_to raise_error
       end
     end
@@ -35,7 +38,7 @@ describe Hatena::Blog::Client do
       it "raises a exception" do
         expect do
           Hatena::Blog::Client.new()
-        end.to raise_exception
+        end.to raise_error
       end
     end
   end

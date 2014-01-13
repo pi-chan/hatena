@@ -1,17 +1,11 @@
 require 'faraday'
-require 'simple_oauth'
 
 module Hatena
   module Blog
     class Client
 
-      def initialize(consumer_key, consumer_secret, token, token_secret, hatena_id, blog_id)
-        @credentials = {
-          consumer_key: consumer_key,
-          consumer_secret: consumer_secret,
-          token: token,
-          token_secret: token_secret,
-        }
+      def initialize(credentials, hatena_id, blog_id)
+        @credentials = credentials
         @hatena_id = hatena_id
         @blog_id = blog_id
       end
@@ -62,7 +56,7 @@ module Hatena
         uri = URI.parse(url)
 
         response = connection.send(:put,uri) do |req|
-          req.headers[:authorization] = auth_header(:put,uri)
+          req.headers[:authorization] = @credentials.auth_header(:put, uri)
           req.headers['Content-Type'] = 'application/xml'
           req.body = body
         end
@@ -72,15 +66,11 @@ module Hatena
 
       private
 
-      def auth_header(method, uri)
-        SimpleOAuth::Header.new(method.to_sym, uri, {}, @credentials).to_s
-      end
-
       def fetch_entry_body(url)
         connection = Faraday.new
         uri = URI.parse(url)
         response = connection.send(:get, uri) do |req|
-          req.headers[:authorization] = auth_header(:get,uri)
+          req.headers[:authorization] = @credentials.auth_header(:get, uri)
         end
         response.body
       end
@@ -88,7 +78,7 @@ module Hatena
       def fetch_page(uri)
         connection = Faraday.new
         response = connection.send(:get, uri) do |req|
-          req.headers[:authorization] = auth_header(:get, uri)
+          req.headers[:authorization] = @credentials.auth_header(:get, uri)
         end
 
         doc = Nokogiri::XML(response.body)
