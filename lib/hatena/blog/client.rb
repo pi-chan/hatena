@@ -103,7 +103,7 @@ module Hatena
           required = @draft ? !entry_is_published : entry_is_published
         end
         
-        if @range
+        if @range and required
           updated = DateTime.parse(entry.at('updated').content)
           if updated < @range.begin
             should_fetch_more = false
