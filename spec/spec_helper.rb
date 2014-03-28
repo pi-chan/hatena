@@ -13,6 +13,7 @@ require 'simplecov'
 require 'hatena'
 require 'rspec'
 require 'webmock/rspec'
+require 'debugger'
 
 WebMock.disable_net_connect!(:allow => 'coveralls.io')
 
@@ -39,5 +40,29 @@ end
 
 def fixture(file)
   File.new(File.join(fixture_path, file))
+end
+
+def test_client
+  @hatena_id = "hatena_id"
+  @blog_id = "blog_id.hatenablog.com"
+  @endpoint = "https://blog.hatena.ne.jp/#{@hatena_id}/#{@blog_id}"
+  @credentials = Hatena::Credentials.new(
+    "consumer_key",
+    "consumer_secret",
+    "token",
+    "token_secret"
+  )
+  
+  @client = Hatena::Blog::Client.new(
+    @credentials,
+    @hatena_id,
+    @blog_id
+  )
+
+  stub_request(:get, @endpoint+"/atom/entry").to_return(body: fixture("fetch_entries01.xml") )
+  stub_request(:get, @endpoint+"/atom/entry?page=2").to_return(body: fixture("fetch_entries02.xml") )
+  stub_request(:get, @endpoint+"/atom/entry?page=3").to_return(body: fixture("fetch_entries03.xml") )
+
+  return @client
 end
 

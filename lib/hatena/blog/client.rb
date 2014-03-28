@@ -1,10 +1,11 @@
 require 'faraday'
+require "nokogiri"
 
 module Hatena
   module Blog
     class Client
-
       def initialize(credentials, hatena_id, blog_id)
+        raise ArgumentError if credentials.class != Hatena::Credentials
         @credentials = credentials
         @hatena_id = hatena_id
         @blog_id = blog_id
@@ -82,6 +83,7 @@ module Hatena
         end
 
         doc = Nokogiri::XML(response.body)
+
         should_fetch_more = true
 
         doc.search("entry").each do |entry|
@@ -119,7 +121,9 @@ module Hatena
         end
 
         if required
-          @entries << Hatena::Blog::Entry.new(entry)
+          xml_string = entry.to_s.gsub(/<entry>/,"<entry xmlns:app=\"http://www.w3.org/2007/app\">")          
+          created = Hatena::Blog::Entry.new(xml_string)
+          @entries << created
         end
 
         return should_fetch_more

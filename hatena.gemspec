@@ -7,6 +7,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'faraday', ['>= 0.8', '< 0.10']
   spec.add_dependency 'nokogiri', ['>= 1.5.10']
   spec.add_dependency 'simple_oauth', '~> 0.2.0'
+  spec.add_dependency 'xml-simple'
   spec.name          = "hatena"
   spec.version       = Hatena::VERSION
   spec.authors       = ["xoyip"]

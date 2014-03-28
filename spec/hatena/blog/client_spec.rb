@@ -1,38 +1,29 @@
 require 'spec_helper'
-require 'active_support/all'
 
 describe Hatena::Blog::Client do
 
   before do
-    @hatena_id = "hatena_id"
-    @blog_id = "blog_id.hatenablog.com"
-    @endpoint = "https://blog.hatena.ne.jp/#{@hatena_id}/#{@blog_id}"
-    @credentials = Hatena::Credentials.new(
-      "consumer_key",
-      "consumer_secret",
-      "token",
-      "token_secret"
-    )
-    
-    @client = Hatena::Blog::Client.new(
-      @credentials,
-      @hatena_id,
-      @blog_id
-    )
-
-    stub_request(:get, @endpoint+"/atom/entry").to_return(body: fixture("fetch_entries01.xml") )
-    stub_request(:get, @endpoint+"/atom/entry?page=2").to_return(body: fixture("fetch_entries02.xml") )
-    stub_request(:get, @endpoint+"/atom/entry?page=3").to_return(body: fixture("fetch_entries03.xml") )
+    @client = test_client()
+    @credential = Hatena::Credentials.new("", "", "", "")
   end
   
   describe ".new" do
-    context "when arguments count is correct" do
+    context "when argument types are correct" do
       it "does not raise an exception" do
         expect do
-          Hatena::Blog::Client.new(0,1,2)
+          Hatena::Blog::Client.new(@credential, "", "")
         end.not_to raise_error
       end
     end
+
+    context "when argument types are not correct" do
+      it "raise a exception" do
+        expect do
+          Hatena::Blog::Client.new(0, 1, 2)
+        end.to raise_error
+      end
+    end
+
 
     context "when arguments count is not correct" do
       it "raises a exception" do

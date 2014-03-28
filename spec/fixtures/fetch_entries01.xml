@@ -32,11 +32,11 @@
     </app:control>
   </entry>
   <entry>
-    <id>tag:blog.hatena.ne.jp,2013:blog-hatena_id-20000000000000-3000000000000000</id>
-    <link rel="edit" href="https://blog.hatena.ne.jp/hatena_id/blog_id.hatenablog.com/atom/edit/2500000000"/>
+    <id>tag:blog.hatena.ne.jp,2013:blog-hatena_id-12300000000000-3000000000000000</id>
+    <link rel="edit" href="https://blog.hatena.ne.jp/hatena_id/blog_id.hatenablog.com/atom/edit/123456"/>
     <link rel="alternate" type="text/html" href="http://blog_id.hatenablog.com/entry/2013/09/02/112823"/>
     <author><name>hatena_id</name></author>
-    <title>記事タイトル</title>
+    <title>hogehogehoge</title>
     <updated>2013-09-02T11:28:23+09:00</updated>
     <published>2013-09-02T11:28:23+09:00</published>
     <app:edited>2013-09-02T11:28:23+09:00</app:edited>
